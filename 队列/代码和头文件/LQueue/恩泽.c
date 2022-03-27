@@ -1,6 +1,6 @@
-#include "LQueue.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include"sb.h"
 int main()
 {
     printf("------------------------\n");
@@ -19,9 +19,8 @@ int main()
 	//flag用来判断是否有链表 
 	int flag = 0, length;
 	LQueue Q;
-	void *e, *data;
 	Q.front = Q.rear = NULL;
-	
+	void *e = malloc(21);
 	while(1){
 		printf("请输入序号:");
 		switch(GetNumber()){
@@ -38,6 +37,7 @@ int main()
 			case 2 :
 				if(flag){
 					DestoryLQueue(&Q);
+					printf("销毁成功\n");
 					flag = 0;
 				}
 				else{
@@ -59,7 +59,8 @@ int main()
 				break;
 			case 4 :
 				if(flag){
-					if(GetHeadLQueue(&Q, e));
+					if(GetHeadLQueue(&Q, e))
+						;
 					else{
 						printf("队列为空\n");
 					}
@@ -78,51 +79,56 @@ int main()
 				}
 			case 6 :
 				if(flag){
-					//void *GetData(LQueue *Q)
-					{
-						type t;
-						printf("你想入队哪种类型？:\n");
-					    printf("1. 整型 2. 字符型 3. 浮点型(精确到小数点后2位) 4. 字符串\n");
-					    t = GetNumber();
-					    while(t<1 || t>4)
-					    {
-					     	printf("应输入在[1,4]之间的整数！\n请重输：");
-					      	scanf("%d", &t);
-					    }
-						printf("想入队的数据 :");
-					    switch(t)
-					    {
-					     	case INT:{
-								int a;
-								scanf("%d", &a);
-								//Q->type[Q->rear]=t;
-								EnLQueue(&Q, &a);
-								break;
-							}
-							case CHAR: {
-								char a ;
-								scanf("%c", &a);
-								//Q->type[Q->rear]=t;
-								EnLQueue(&Q, &a);
-								break;
-							}
-					        case DOUBLE:{
-								double a ;
-								scanf("%lf", &a);
-								//Q->type[Q->rear]=t;
-								EnLQueue(&Q, &a);
-								break;
-							}
-					        case STRING:{
-								char a[20];
-								printf("最大长度为20哦！\n");
-								scanf("%s", a);
-								Q->type[Q->rear]=t;
-								EnLQueue(&Q, a);
-								break;
-							} 
-						}
-					}
+	printf("你想入队哪种类型？请输入首字母小写:\n");
+    printf("int char double string\n");
+    scanf("%c", &type);
+    /*
+    while(type!='i'&&type!='c'&&type!='d'&&type!='s')
+    {
+     	printf("输入错误\n请重输：");
+      	scanf("%c", &type);
+    }*/
+	printf("想入队的数据 :");
+    switch(type)
+    {
+    	static i; 
+     	case 'i':{
+			int data;
+			scanf("%d", &data);
+			datatype[i++]=type;
+			EnLQueue(&Q, &data);
+			break;
+		}
+		case 'c': {
+			char data;
+			fflush(stdin);
+			scanf("%c", &data);
+			datatype[i++]=type;
+			EnLQueue(&Q, &data);
+			break;
+		}
+        case 'd':{
+			double data ;
+			scanf("%lf", &data);
+			datatype[i++]=type;
+			EnLQueue(&Q, &data);
+			break;
+		}
+        case 's':{
+			char data[20];
+			printf("最大长度为20哦！\n");
+			scanf("%s", data);
+			datatype[i++]=type;
+			EnLQueue(&Q, data);
+			break;
+		}
+}
+//					if(EnLQueue(&Q, &data)){
+//						printf("入队成功\n");
+//					}
+//					else{
+//						printf("无法申请新节点,入队失败\n");
+//					}
 				}
 				else{
 					printf("队列未初始化\n");
@@ -134,16 +140,28 @@ int main()
 						printf("元素已出队\n");
 					}
 					else{
-						printf("空栈\n");
+						printf("队列为空\n");
 					}
 				} 
 				else{
 					printf("队列未初始化\n");
 				}
 				break;
+			case 8 :
+				if(flag){
+						printf("队列已清空\n");
+				}
+				else{
+					printf("队列未初始化\n");
+				}
+				break;
 			case 9 :
 				if(flag){
-					TraverseLQueue(&Q, foo);
+					if(TraverseLQueue(&Q, LPrint))
+						;
+					else{
+						printf("队列为空\n");
+					}
 				}
 				else{
 					printf("队列未初始化\n");

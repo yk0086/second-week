@@ -33,20 +33,20 @@ typedef struct Lqueue
 {
     Node *front;                   //队头
     Node *rear;                    //队尾
-    int length;            //队列长度
+    size_t length;            //队列长度
 } LQueue;
-
+/*
+typedef enum
+{
+    INT=1, CHAR, DOUBLE, STRING
+}Type;
+*/
 typedef enum
 {
     FALSE=0, TRUE=1
 } Status;
-typedef enum
-{
-    INT=1, CHAR, DOUBLE, STRING
-}type;
-//char type;					
-//char datatype[30];
-	
+char type;					
+char datatype[30];			
 
 /**************************************************************
  *    Prototype Declare Section
@@ -139,11 +139,11 @@ Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q));
  *  @notice      : None
  */
 void LPrint(void *q);
-void foo(void *q);
+
 int GetNumber();
-void *GetData(LQueue *Q);
 
 /**************************************************************
  *    End-Multi-Include-Prevent Section
  **************************************************************/
 #endif // LQUEUE_H_INCLUDED
+
